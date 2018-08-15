@@ -7,14 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		576B9854D88D7B1197065181 /* Pods_HowlTalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276D8564808EEE83F0C0D169 /* Pods_HowlTalk.framework */; };
+		CD112D32211730EC00BA5344 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD112D31211730EC00BA5344 /* LoginViewController.swift */; };
+		CD4CE8A42110771A0077CC61 /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE8A32110771A0077CC61 /* RemoteConfigDefaults.plist */; };
 		CDE242A22110694B00D409E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE242A12110694B00D409E7 /* AppDelegate.swift */; };
 		CDE242A42110694B00D409E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE242A32110694B00D409E7 /* ViewController.swift */; };
 		CDE242A72110694B00D409E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE242A52110694B00D409E7 /* Main.storyboard */; };
 		CDE242A92110695200D409E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDE242A82110695200D409E7 /* Assets.xcassets */; };
 		CDE242AC2110695200D409E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDE242AA2110695200D409E7 /* LaunchScreen.storyboard */; };
+		CDE242B421106BC000D409E7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDE242B321106BC000D409E7 /* GoogleService-Info.plist */; };
+		CDEAB4A52119B3A70086F212 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEAB4A42119B3A70086F212 /* MainViewController.swift */; };
+		CDFB799721189A7D00665D09 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFB799621189A7D00665D09 /* SignupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		276D8564808EEE83F0C0D169 /* Pods_HowlTalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HowlTalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DD656B1E936C37CBF40F83A /* Pods-HowlTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowlTalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk.release.xcconfig"; sourceTree = "<group>"; };
+		934FE655E7F77B10E6A3AB7B /* Pods-HowlTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowlTalk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk.debug.xcconfig"; sourceTree = "<group>"; };
+		CD112D31211730EC00BA5344 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CD4CE8A32110771A0077CC61 /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		CDE2429E2110694B00D409E7 /* HowlTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HowlTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE242A12110694B00D409E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDE242A32110694B00D409E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +33,9 @@
 		CDE242A82110695200D409E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDE242AB2110695200D409E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDE242AD2110695200D409E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDE242B321106BC000D409E7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CDEAB4A42119B3A70086F212 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		CDFB799621189A7D00665D09 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +43,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				576B9854D88D7B1197065181 /* Pods_HowlTalk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044F0D8FD278A92BAB0C848C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				276D8564808EEE83F0C0D169 /* Pods_HowlTalk.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2F6E30BE5777D66FE4E8417B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				934FE655E7F77B10E6A3AB7B /* Pods-HowlTalk.debug.xcconfig */,
+				2DD656B1E936C37CBF40F83A /* Pods-HowlTalk.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CDE242952110694B00D409E7 = {
 			isa = PBXGroup;
 			children = (
 				CDE242A02110694B00D409E7 /* HowlTalk */,
 				CDE2429F2110694B00D409E7 /* Products */,
+				2F6E30BE5777D66FE4E8417B /* Pods */,
+				044F0D8FD278A92BAB0C848C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,10 +90,15 @@
 			children = (
 				CDE242A12110694B00D409E7 /* AppDelegate.swift */,
 				CDE242A32110694B00D409E7 /* ViewController.swift */,
+				CD4CE8A32110771A0077CC61 /* RemoteConfigDefaults.plist */,
 				CDE242A52110694B00D409E7 /* Main.storyboard */,
 				CDE242A82110695200D409E7 /* Assets.xcassets */,
+				CDE242B321106BC000D409E7 /* GoogleService-Info.plist */,
 				CDE242AA2110695200D409E7 /* LaunchScreen.storyboard */,
 				CDE242AD2110695200D409E7 /* Info.plist */,
+				CD112D31211730EC00BA5344 /* LoginViewController.swift */,
+				CDFB799621189A7D00665D09 /* SignupViewController.swift */,
+				CDEAB4A42119B3A70086F212 /* MainViewController.swift */,
 			);
 			path = HowlTalk;
 			sourceTree = "<group>";
@@ -71,9 +110,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDE242B02110695200D409E7 /* Build configuration list for PBXNativeTarget "HowlTalk" */;
 			buildPhases = (
+				2570B27357C465481075833C /* [CP] Check Pods Manifest.lock */,
 				CDE2429A2110694B00D409E7 /* Sources */,
 				CDE2429B2110694B00D409E7 /* Frameworks */,
 				CDE2429C2110694B00D409E7 /* Resources */,
+				FECADCE2BF919CC8EF027DFC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -123,6 +164,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDE242AC2110695200D409E7 /* LaunchScreen.storyboard in Resources */,
+				CD4CE8A42110771A0077CC61 /* RemoteConfigDefaults.plist in Resources */,
+				CDE242B421106BC000D409E7 /* GoogleService-Info.plist in Resources */,
 				CDE242A92110695200D409E7 /* Assets.xcassets in Resources */,
 				CDE242A72110694B00D409E7 /* Main.storyboard in Resources */,
 			);
@@ -130,13 +173,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2570B27357C465481075833C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HowlTalk-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FECADCE2BF919CC8EF027DFC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CDE2429A2110694B00D409E7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD112D32211730EC00BA5344 /* LoginViewController.swift in Sources */,
 				CDE242A42110694B00D409E7 /* ViewController.swift in Sources */,
+				CDFB799721189A7D00665D09 /* SignupViewController.swift in Sources */,
 				CDE242A22110694B00D409E7 /* AppDelegate.swift in Sources */,
+				CDEAB4A52119B3A70086F212 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,10 +375,13 @@
 		};
 		CDE242B12110695200D409E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 934FE655E7F77B10E6A3AB7B /* Pods-HowlTalk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XRW8T68AQ5;
 				INFOPLIST_FILE = HowlTalk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -295,10 +395,13 @@
 		};
 		CDE242B22110695200D409E7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2DD656B1E936C37CBF40F83A /* Pods-HowlTalk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XRW8T68AQ5;
 				INFOPLIST_FILE = HowlTalk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
