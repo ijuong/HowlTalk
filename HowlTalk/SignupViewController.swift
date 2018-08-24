@@ -52,15 +52,22 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
         Auth.auth().createUser(withEmail: self.email.text!, password: self.password.text!) { (user, error) in
             
             let uid = user?.user.uid
-            
             let image = UIImageJPEGRepresentation(self.imageView.image!, 0.1)
-            
             let reference = Storage.storage().reference().child("userImage").child(uid!)
             
             reference.putData(image!, metadata: nil, completion: { (metadata, error) in
-              
+            
                 reference.downloadURL(completion: { (url, error) in
-                    Database.database().reference().child("users").child(uid!).setValue(["name":self.name.text!, "profileImageUrl":url?.absoluteString])
+                    
+                    let values = ["userName":self.name.text!,
+                                  "profileImageUrl":url?.absoluteString,
+                                  "uid":Auth.auth().currentUser?.uid]
+                    
+                    Database.database().reference().child("users").child(uid!).setValue(values, withCompletionBlock: { (err, ref) in
+                        if(err==nil) {
+                            self.cancelEvent()
+                        }
+                    })
                 })
             })
         }
@@ -76,7 +83,7 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        imageView.image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
         dismiss(animated: true, completion: nil)
     }
