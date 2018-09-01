@@ -10,11 +10,14 @@ target 'HowlTalk' do
   pod 'SnapKit', '~> 4.0.0'
   pod 'Firebase/Core'
   pod 'Firebase/RemoteConfig'
+  pod 'Firebase/Messaging' 
   pod 'TextFieldEffects'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'ObjectMapper'
+  pod 'Alamofire', '~> 4.5'
+  pod 'Kingfisher', '~> 4.0'
 
   post_install do |installer|
       installer.pods_project.build_configurations.each do |config|

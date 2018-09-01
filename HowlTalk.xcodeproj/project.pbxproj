@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		307C27DE2134F66A005BD530 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307C27DD2134F66A005BD530 /* AccountViewController.swift */; };
+		30B416862132FE3F00EE4456 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B416852132FE3F00EE4456 /* NotificationModel.swift */; };
 		576B9854D88D7B1197065181 /* Pods_HowlTalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276D8564808EEE83F0C0D169 /* Pods_HowlTalk.framework */; };
 		CD112D32211730EC00BA5344 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD112D31211730EC00BA5344 /* LoginViewController.swift */; };
 		CD4CE8A42110771A0077CC61 /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD4CE8A32110771A0077CC61 /* RemoteConfigDefaults.plist */; };
@@ -27,6 +29,8 @@
 /* Begin PBXFileReference section */
 		276D8564808EEE83F0C0D169 /* Pods_HowlTalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HowlTalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DD656B1E936C37CBF40F83A /* Pods-HowlTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowlTalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk.release.xcconfig"; sourceTree = "<group>"; };
+		307C27DD2134F66A005BD530 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		30B416852132FE3F00EE4456 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		934FE655E7F77B10E6A3AB7B /* Pods-HowlTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowlTalk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk.debug.xcconfig"; sourceTree = "<group>"; };
 		CD112D31211730EC00BA5344 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CD4CE8A32110771A0077CC61 /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 			children = (
 				CDEAB4A6212418140086F212 /* UserModel.swift */,
 				CDEAB4AB212460820086F212 /* ChatModel.swift */,
+				30B416852132FE3F00EE4456 /* NotificationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 			children = (
 				CDEAB4A42119B3A70086F212 /* PeopleViewController.swift */,
 				CDEAB4AE212C40730086F212 /* ChatRoomsViewController.swift */,
+				307C27DD2134F66A005BD530 /* AccountViewController.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -167,6 +173,7 @@
 				TargetAttributes = {
 					CDE2429D2110694B00D409E7 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -237,8 +244,10 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -248,8 +257,10 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -277,7 +288,9 @@
 				CDEAB4A921245EC10086F212 /* ChatViewController.swift in Sources */,
 				CDE242A22110694B00D409E7 /* AppDelegate.swift in Sources */,
 				CDEAB4A7212418140086F212 /* UserModel.swift in Sources */,
+				30B416862132FE3F00EE4456 /* NotificationModel.swift in Sources */,
 				CDEAB4A52119B3A70086F212 /* PeopleViewController.swift in Sources */,
+				307C27DE2134F66A005BD530 /* AccountViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,17 +435,20 @@
 			baseConfigurationReference = 934FE655E7F77B10E6A3AB7B /* Pods-HowlTalk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HowlTalk/HowlTalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8R3C5472LX;
+				DEVELOPMENT_TEAM = XRW8T68AQ5;
 				INFOPLIST_FILE = HowlTalk/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ijuyong.HowlTalk2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ijuyong.HowlTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HowlTalk/Model/HowlTalk-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -443,17 +459,19 @@
 			baseConfigurationReference = 2DD656B1E936C37CBF40F83A /* Pods-HowlTalk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HowlTalk/HowlTalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8R3C5472LX;
+				DEVELOPMENT_TEAM = XRW8T68AQ5;
 				INFOPLIST_FILE = HowlTalk/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ijuyong.HowlTalk2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ijuyong.HowlTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HowlTalk/Model/HowlTalk-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -53,8 +53,10 @@ class SignupViewController: UIViewController, UINavigationControllerDelegate, UI
             
             let uid = user?.user.uid
             let image = UIImageJPEGRepresentation(self.imageView.image!, 0.1)
-            let reference = Storage.storage().reference().child("userImage").child(uid!)
+            user?.user.createProfileChangeRequest().displayName = self.name.text!
+            user?.user.createProfileChangeRequest().commitChanges(completion: nil)
             
+            let reference = Storage.storage().reference().child("userImage").child(uid!)
             reference.putData(image!, metadata: nil, completion: { (metadata, error) in
             
                 reference.downloadURL(completion: { (url, error) in

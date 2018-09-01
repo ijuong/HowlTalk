@@ -28,7 +28,12 @@ class LoginViewController: UIViewController {
         self.view.addSubview(statusBar)
         statusBar.snp.makeConstraints{ (m) in
             m.right.top.left.equalTo(self.view)
-            m.height.equalTo(20)
+            
+            if(UIScreen.main.nativeBounds.height == 2436) {
+                m.height.equalTo(40)
+            }else{
+                m.height.equalTo(20)
+            }
         }
         
         color = remoteConfig["splash_background"].stringValue
@@ -44,6 +49,11 @@ class LoginViewController: UIViewController {
             if(user != nil){
                 let view = self.storyboard?.instantiateViewController(withIdentifier: "MainViewTabBarController") as! UITabBarController
                 self.present(view, animated: true, completion: nil)
+                
+                let uid = Auth.auth().currentUser?.uid
+                let token = InstanceID.instanceID().token()
+                Database.database().reference().child("users").child(uid!).updateChildValues(["pushToken":token!])
+                
             }
         }
         

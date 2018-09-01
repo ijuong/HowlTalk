@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import Alamofire
+import Kingfisher
 
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -21,7 +23,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     var uid : String?
     var chatRoomUid : String?
     var comments : [ChatModel.Comment] = []
-    var userModel : UserModel?
+    var destinationUserModel : UserModel?
+    
+    var databaseRef : DatabaseReference?
+    var observe : UInt?
+    
+    var peopleCount : Int?
     
     public var destinationUid : String?
     
@@ -54,6 +61,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         NotificationCenter.default.removeObserver(self)
         self.tabBarController?.tabBar.isHidden = false
+        
+        databaseRef?.removeObserver(withHandle: observe!)
     }
     
     @objc func keyboardWillShow(notification: Notification){
@@ -99,15 +108,23 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let time = self.comments[indexPath.row].timestamp{
                 view.label_timestamp.text = time.toDayTime
             }
+            
+            setReadCount(label: view.label_read_counter, position: indexPath.row)
+            
             return view
             
         }else{
             let view = tableView.dequeueReusableCell(withIdentifier: "DestinationMessageCell", for : indexPath) as! DestinationMessageCell
-            view.label_name.text = userModel?.userName
+            view.label_name.text = destinationUserModel?.userName
             view.label_message.text = self.comments[indexPath.row].message
             view.label_message.numberOfLines = 0
             
-            let url = URL(string: (self.userModel?.profileImageUrl)!)
+            let url = URL(string: (self.destinationUserModel?.profileImageUrl)!)
+           
+            view.imageview_profile.layer.cornerRadius = view.imageview_profile.frame.width/2
+            view.imageview_profile.clipsToBounds = true
+            view.imageview_profile.kf.setImage(with: url)
+            /* kingfisher로 변경
             URLSession.shared.dataTask(with: url!, completionHandler: { (data, reponse, err) in
                 DispatchQueue.main.async {
                     view.imageview_profile.image = UIImage(data: data!)
@@ -115,10 +132,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                     view.imageview_profile.clipsToBounds = true
                 }
             }).resume()
-            
+            */
             if let time = self.comments[indexPath.row].timestamp{
                 view.label_timestamp.text = time.toDayTime
             }
+            
+            setReadCount(label: view.label_read_counter, position: indexPath.row)
             
             return view
         }
@@ -159,9 +178,35 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             Database.database().reference().child("chatrooms").child(chatRoomUid!).child("comments").childByAutoId().setValue(value, withCompletionBlock: {
                 (err, ref) in
+                self.sendGcm()
                 self.textfield_message.text = ""
             })
         }
+    }
+    
+    func sendGcm(){
+        
+        let url = "https://gcm-http.googleapis.com/gcm/send"
+        let header : HTTPHeaders = [
+            "Content-Type":"application/json",
+            "Authorization":"key=AIzaSyAZiC4wi9zP7zYHCY2F8TpkxEnWVBu9hmc"
+        ]
+        
+        var userName = Auth.auth().currentUser?.displayName
+        var notificationModel = NotificationModel()
+        notificationModel.to = destinationUserModel?.pushToken
+        notificationModel.notification.title = userName
+        notificationModel.notification.text = textfield_message.text
+        notificationModel.data.title = userName
+        notificationModel.data.text = textfield_message.text
+        
+        let param = notificationModel.toJSON()
+        
+        Alamofire.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+            print(response.result.value)
+        }
+
+        
     }
     
     func checkChatRoom(){
@@ -185,33 +230,88 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         })
         
     }
+    
     func getDestinationInfo(){
         Database.database().reference().child("users").child(self.destinationUid!).observeSingleEvent(of: DataEventType.value, with: { (datasnapshot) in
-            self.userModel = UserModel()
-            self.userModel?.setValuesForKeys(datasnapshot.value as! [String:Any])
+            self.destinationUserModel = UserModel()
+            self.destinationUserModel?.setValuesForKeys(datasnapshot.value as! [String:Any])
             self.getMessageList()
-            
-            
         })
+    }
+    
+    func setReadCount(label: UILabel?, position: Int?) {
+        
+        let readCount = self.comments[position!].readUsers.count
+        
+        if(peopleCount == nil) {
+            Database.database().reference().child("chatrooms").child(chatRoomUid!).child("users").observeSingleEvent(of: DataEventType.value, with: { (datasnapshot) in
+                
+                let dic = datasnapshot.value as! [String:Any]
+                
+                self.peopleCount = dic.count
+                
+                let noReadCount = self.peopleCount! - readCount
+                
+                if(noReadCount > 0){
+                    label?.isHidden = false
+                    label?.text = String(noReadCount)
+                }else{
+                    label?.isHidden = true
+                }
+            })
+        }else{
+            let noReadCount = peopleCount! - readCount
+            
+            if(noReadCount > 0){
+                label?.isHidden = false
+                label?.text = String(noReadCount)
+            }else{
+                label?.isHidden = true
+            }
+        }
+        
+        
     }
     
     func getMessageList(){
         
-        Database.database().reference().child("chatrooms").child(self.chatRoomUid!).child("comments").observe(DataEventType.value, with: { (datasnapshot) in
+        databaseRef = Database.database().reference().child("chatrooms").child(self.chatRoomUid!).child("comments")
+        observe = databaseRef?.observe(DataEventType.value, with: { (datasnapshot) in
             self.comments.removeAll()
+            
+            var readUsersDic : Dictionary<String, AnyObject> = [:]
             
             for item in datasnapshot.children.allObjects as! [DataSnapshot]{
                 
-                print(item.value as! [String:AnyObject])
-                
+                let key = item.key as String
+                //print(item.value as! [String:AnyObject])
                 let comment = ChatModel.Comment(JSON: item.value as! [String:AnyObject])
+                let comment_modify = ChatModel.Comment(JSON: item.value as! [String:AnyObject])
+                comment_modify?.readUsers[self.uid!] = true
+                readUsersDic[key] = comment_modify?.toJSON() as! NSDictionary
+                
                 self.comments.append(comment!)
             }
-            self.tableview.reloadData()
             
-            if self.comments.count > 0 {
-                self.tableview.scrollToRow(at: IndexPath(item:self.comments.count-1, section:0), at: UITableViewScrollPosition.bottom, animated: true)
+            let nsDic = readUsersDic as NSDictionary
+            
+            if(!(self.comments.last?.readUsers.keys.contains(self.uid!))!) {
+                datasnapshot.ref.updateChildValues(nsDic as! [AnyHashable : Any], withCompletionBlock: { (err, ref) in
+                    self.tableview.reloadData()
+                    
+                    if self.comments.count > 0 {
+                        self.tableview.scrollToRow(at: IndexPath(item:self.comments.count-1, section:0), at: UITableViewScrollPosition.bottom, animated: true)
+                    }
+                })
+            }else{
+                self.tableview.reloadData()
+                
+                if self.comments.count > 0 {
+                    self.tableview.scrollToRow(at: IndexPath(item:self.comments.count-1, section:0), at: UITableViewScrollPosition.bottom, animated: true)
+                }
             }
+            
+            
         })
     }
     
@@ -244,6 +344,7 @@ extension Int {
 class MyMessageCell : UITableViewCell{
     @IBOutlet weak var label_message: UILabel!
     @IBOutlet weak var label_timestamp: UILabel!
+    @IBOutlet weak var label_read_counter: UILabel!
     
 }
 
@@ -252,5 +353,6 @@ class DestinationMessageCell : UITableViewCell{
     @IBOutlet weak var imageview_profile: UIImageView!
     @IBOutlet weak var label_name: UILabel!
     @IBOutlet weak var label_timestamp: UILabel!
+    @IBOutlet weak var label_read_counter: UILabel!
     
 }

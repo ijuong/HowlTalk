@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Firebase
+import Kingfisher
 
 class PeopleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -71,6 +72,11 @@ class PeopleViewController: UIViewController, UITableViewDelegate, UITableViewDa
             m.height.width.equalTo(50)
         }
         
+        let url = URL(string: array[indexPath.row].profileImageUrl!)
+        imageview.layer.cornerRadius = 50/2
+        imageview.clipsToBounds = true
+        imageview.kf.setImage(with: url)
+        /* kingfisher로 변경
         URLSession.shared.dataTask(with: URL(string: array[indexPath.row].profileImageUrl!)!) { (data, reponse, err) in
             
             DispatchQueue.main.async {
@@ -78,8 +84,8 @@ class PeopleViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 imageview.layer.cornerRadius = imageview.frame.size.width/2
                 imageview.clipsToBounds = true
             }
-        }.resume()
-        
+        }. resume()
+        */
         
         let label = cell.label!
         
@@ -89,6 +95,31 @@ class PeopleViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         label.text = array[indexPath.row].userName
+        
+        let label_comment = cell.label_comment
+        label_comment.snp.makeConstraints { (m) in
+            m.centerX.equalTo(cell.uiview_comment_background)
+            m.centerY.equalTo(cell.uiview_comment_background)
+        }
+        
+        if let comment = array[indexPath.row].comment{
+            label_comment.text = comment
+        }
+        
+        cell.uiview_comment_background.snp.makeConstraints { (m) in
+            m.right.equalTo(cell).offset(-10)
+            m.centerY.equalTo(cell)
+            
+            if let count = label_comment.text?.count{
+                m.width.equalTo(count * 20)
+            }else{
+                m.width.equalTo(0)
+            }
+            
+            m.height.equalTo(30)
+        }
+        
+        cell.uiview_comment_background.backgroundColor = UIColor.gray
         
         return cell
     }
@@ -124,11 +155,15 @@ class PeopleViewController: UIViewController, UITableViewDelegate, UITableViewDa
 class PeopleViewTableCell : UITableViewCell{
     var imageview : UIImageView! = UIImageView()
     var label : UILabel! = UILabel()
+    var label_comment : UILabel = UILabel()
+    var uiview_comment_background : UIView = UIView()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(imageview)
         self.addSubview(label)
+        self.addSubview(uiview_comment_background)
+        self.addSubview(label_comment)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 
 class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -65,6 +66,10 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.label_title.text = userModel.userName
             
             let url = URL(string: userModel.profileImageUrl!)
+            cell.imageview.layer.cornerRadius = cell.imageview.frame.width/2
+            cell.imageview.layer.masksToBounds = true
+            cell.imageview.kf.setImage(with: url)
+            /* kingfisher
             URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, err) in
                 DispatchQueue.main.sync {
                     cell.imageview.image = UIImage(data: data!)
@@ -72,7 +77,7 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
                     cell.imageview.layer.masksToBounds = true
                 }
             }).resume()
-            
+            */
             let lastMessageKey = self.chatrooms[indexPath.row].comments.keys.sorted(){$0>$1}
             cell.label_lastmessage.text = self.chatrooms[indexPath.row].comments[lastMessageKey[0]]?.message
             
