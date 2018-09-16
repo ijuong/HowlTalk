@@ -18,6 +18,7 @@ target 'HowlTalk' do
   pod 'ObjectMapper'
   pod 'Alamofire', '~> 4.5'
   pod 'Kingfisher', '~> 4.0'
+  pod 'BEMCheckBox'
 
   post_install do |installer|
       installer.pods_project.build_configurations.each do |config|

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		305D1799213E9C2D0097C510 /* SelectFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305D1798213E9C2D0097C510 /* SelectFriendViewController.swift */; };
+		305D179B213EA4E20097C510 /* GroupChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305D179A213EA4E20097C510 /* GroupChatRoomViewController.swift */; };
 		307C27DE2134F66A005BD530 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307C27DD2134F66A005BD530 /* AccountViewController.swift */; };
 		30B416862132FE3F00EE4456 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B416852132FE3F00EE4456 /* NotificationModel.swift */; };
 		576B9854D88D7B1197065181 /* Pods_HowlTalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276D8564808EEE83F0C0D169 /* Pods_HowlTalk.framework */; };
@@ -29,6 +31,9 @@
 /* Begin PBXFileReference section */
 		276D8564808EEE83F0C0D169 /* Pods_HowlTalk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HowlTalk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DD656B1E936C37CBF40F83A /* Pods-HowlTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowlTalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk.release.xcconfig"; sourceTree = "<group>"; };
+		305D1797213E99DF0097C510 /* BEMCheckBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BEMCheckBox.h; sourceTree = "<group>"; };
+		305D1798213E9C2D0097C510 /* SelectFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendViewController.swift; sourceTree = "<group>"; };
+		305D179A213EA4E20097C510 /* GroupChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChatRoomViewController.swift; sourceTree = "<group>"; };
 		307C27DD2134F66A005BD530 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		30B416852132FE3F00EE4456 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		934FE655E7F77B10E6A3AB7B /* Pods-HowlTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HowlTalk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk.debug.xcconfig"; sourceTree = "<group>"; };
@@ -115,6 +120,7 @@
 				CD112D31211730EC00BA5344 /* LoginViewController.swift */,
 				CDFB799621189A7D00665D09 /* SignupViewController.swift */,
 				CDEAB4A821245EC10086F212 /* ChatViewController.swift */,
+				305D1797213E99DF0097C510 /* BEMCheckBox.h */,
 			);
 			path = HowlTalk;
 			sourceTree = "<group>";
@@ -135,6 +141,8 @@
 				CDEAB4A42119B3A70086F212 /* PeopleViewController.swift */,
 				CDEAB4AE212C40730086F212 /* ChatRoomsViewController.swift */,
 				307C27DD2134F66A005BD530 /* AccountViewController.swift */,
+				305D1798213E9C2D0097C510 /* SelectFriendViewController.swift */,
+				305D179A213EA4E20097C510 /* GroupChatRoomViewController.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -245,6 +253,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HowlTalk/Pods-HowlTalk-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BEMCheckBox/BEMCheckBox.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
@@ -258,6 +267,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BEMCheckBox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
@@ -281,9 +291,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD112D32211730EC00BA5344 /* LoginViewController.swift in Sources */,
+				305D179B213EA4E20097C510 /* GroupChatRoomViewController.swift in Sources */,
 				CDEAB4AF212C40730086F212 /* ChatRoomsViewController.swift in Sources */,
 				CDE242A42110694B00D409E7 /* ViewController.swift in Sources */,
 				CDFB799721189A7D00665D09 /* SignupViewController.swift in Sources */,
+				305D1799213E9C2D0097C510 /* SelectFriendViewController.swift in Sources */,
 				CDEAB4AC212460820086F212 /* ChatModel.swift in Sources */,
 				CDEAB4A921245EC10086F212 /* ChatViewController.swift in Sources */,
 				CDE242A22110694B00D409E7 /* AppDelegate.swift in Sources */,
@@ -447,7 +459,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ijuyong.HowlTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "HowlTalk/Model/HowlTalk-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = HowlTalk/BEMCheckBox.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -471,7 +483,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ijuyong.HowlTalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "HowlTalk/Model/HowlTalk-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = HowlTalk/BEMCheckBox.h;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

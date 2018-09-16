@@ -218,7 +218,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if let chatRoomdic = item.value as? [String:AnyObject]{
                     
                     let chatModel = ChatModel(JSON: chatRoomdic)
-                    if (chatModel?.users[self.destinationUid!]  == true){
+                    if (chatModel?.users[self.destinationUid!]  == true && chatModel?.users.count == 2){
                         self.chatRoomUid = item.key
                         self.sendButton.isEnabled = true
                         self.getDestinationInfo()
@@ -294,6 +294,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             let nsDic = readUsersDic as NSDictionary
+            
+            if(self.comments.last?.readUsers.keys == nil){
+                return
+            }
             
             if(!(self.comments.last?.readUsers.keys.contains(self.uid!))!) {
                 datasnapshot.ref.updateChildValues(nsDic as! [AnyHashable : Any], withCompletionBlock: { (err, ref) in

@@ -15,6 +15,7 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableview: UITableView!
     var uid : String!
     var chatrooms : [ChatModel]! = []
+    var keys : [String] = []
     var destinationUsers : [String] = []
     
     override func viewDidLoad() {
@@ -34,6 +35,7 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                     if let chatroomdic = item.value as? [String:AnyObject]{
                         let chatmodel = ChatModel(JSON: chatroomdic)
+                        self.keys.append(item.key)
                         self.chatrooms.append(chatmodel!)
                     }
                 }
@@ -50,11 +52,12 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableview.dequeueReusableCell(withIdentifier: "RowCell", for: indexPath) as! CustomCell
         
         var destinationUid : String?
-        
+        print("aaaaaaaaaaaa")
         for item in chatrooms[indexPath.row].users{
             if(item.key != self.uid){
                 destinationUid = item.key
                 destinationUsers.append(destinationUid!)
+                print(item.key)
             }
         }
         
@@ -69,6 +72,11 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.imageview.layer.cornerRadius = cell.imageview.frame.width/2
             cell.imageview.layer.masksToBounds = true
             cell.imageview.kf.setImage(with: url)
+            
+            if(self.chatrooms[indexPath.row].comments.keys.count == 0) {
+                return
+            }
+            
             /* kingfisher
             URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, err) in
                 DispatchQueue.main.sync {
@@ -91,13 +99,32 @@ class ChatRoomsViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
+        print("indexPath.row")
+        print(indexPath.row)
+        print(chatrooms[indexPath.row].users.count)
+        //if(self.destinationUsers.count > 2) {
+        if(chatrooms[indexPath.row].users.count > 2){
+            let destinationUid = self.destinationUsers[indexPath.row]
+            
+            let view = self.storyboard?.instantiateViewController(withIdentifier: "GroupChatRoomViewController") as! GroupChatRoomViewController
+            view.destinationRoom = self.keys[indexPath.row]
+            
+            self.navigationController?.pushViewController(view, animated: true)
+            
+            print("11111111111")
+        }else{
+            let destinationUid = self.destinationUsers[indexPath.row]
+            
+            let view = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+            view.destinationUid = destinationUid
+            
+            self.navigationController?.pushViewController(view, animated: true)
+            
+            print("222222222")
+        }
         
-        let destinationUid = self.destinationUsers[indexPath.row]
-        
-        let view = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-        view.destinationUid = destinationUid
-        
-        self.navigationController?.pushViewController(view, animated: true)
+       
         
     }
 
